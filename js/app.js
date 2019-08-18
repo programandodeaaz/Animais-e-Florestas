@@ -1,33 +1,23 @@
-$(document).ready(function () {
+$('[data-group]').each(function () {
+  var $allTarget = $(this).find('[data-target]'),
+    $allClick = $(this).find('[data-click]'),
+    activeClass = 'active';
 
-  var classActive = 'active';
+    $allTarget.first().addClass(activeClass);
+    $allClick.first().addClass(activeClass);
 
-  $('.animais .tab-menu a').first().addClass(classActive);
-  $('.animais .item').first().addClass(classActive);
+    $allClick.click(function(e){
+      e.preventDefault();
 
+      var id = $(this).data('click');
+          $target = $('[data-target="' + id + '"]');
 
-  $('.animais .tab-menu a').click(function (e) {
-    e.preventDefault();
-    var itemId = $(this).attr('href');
+      $allClick.removeClass(activeClass);
+      $allTarget.removeClass(activeClass);
 
-    $('.animais .tab-menu a').removeClass(classActive);
-    $('.animais .item').removeClass(classActive);
-    $(this).addClass(classActive);
-    $(itemId).addClass(classActive);
-  });
+      $target.addClass(activeClass);
+      $(this).addClass(activeClass);
 
-  $('.florestas .tab-menu a').first().addClass(classActive);
-  $('.florestas .item').first().addClass(classActive);
-
-
-  $('.florestas .tab-menu a').click(function (e) {
-    e.preventDefault();
-    var itemId = $(this).attr('href');
-
-    $('.florestas .tab-menu a').removeClass(classActive);
-    $('.florestas .item').removeClass(classActive);
-    $(this).addClass(classActive);
-    $(itemId).addClass(classActive);
-  });
-
-});
+          
+    });
+});;

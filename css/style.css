@@ -218,3 +218,63 @@ img {
 	top: auto;
 	transform: translate3d(0px,0,0);
 }
+
+/* criando menu hamburguer */
+.mobile-btn {
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin: 20px 20px 0 0;
+	border-top: 4px solid;
+	color: white;
+	float: left;
+	position: relative;
+	cursor: pointer;
+	-webkit-backface-visibility: hidden;
+	}
+
+.mobile-btn::after, .mobile-btn::before {
+	content: '';
+	display: block;
+	height: 4px;
+	background: currentColor;
+	position: relative;
+	transition: transform .2s ease;
+	margin-top: 6px;
+}
+
+.mobile-btn.active {
+	border-top-color: transparent;
+}
+
+.mobile-btn.active::after {
+	margin-top: 0px;
+	top: 2px;
+	transform: rotate(45deg);
+}
+
+.mobile-btn.active::before {
+	margin-top: 0px;
+	top: 6px;
+	transform: rotate(135deg);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

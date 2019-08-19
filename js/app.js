@@ -1,3 +1,4 @@
+// Mudar tab ao click
 $('[data-group]').each(function () {
   var $allTarget = $(this).find('[data-target]'),
     $allClick = $(this).find('[data-click]'),
@@ -20,6 +21,7 @@ $('[data-group]').each(function () {
   });
 });
 
+// Scroll suave para link interno 
 $('.menu-nav a[href^="#"]').click(function (e) { //[href^="#"] significa selecionar todos os itens que começar om ( # ). Assim podemos usar links externos sem problemas por causa do preventDefault que previne o padrão dos links no site.
   e.preventDefault();
   var id = $(this).attr('href'),
@@ -31,6 +33,7 @@ $('.menu-nav a[href^="#"]').click(function (e) { //[href^="#"] significa selecio
   }, 500);
 });
 
+// Scroll Suave para o topo 
 $('.logo').click(function (e) {
   e.preventDefault();
   $('html, body').animate({
@@ -38,6 +41,7 @@ $('.logo').click(function (e) {
   }, 500)
 });
 
+// Mudar para Active o menu de acordo com a area 
 $('section').each(function(){
 	var height = $(this).height(),
 			offsetTop = $(this).offset().top,
@@ -55,27 +59,40 @@ $('section').each(function(){
 	});
 });
 
+// Botão do menu mobile 
 $('.mobile-btn').click(function(){
 	$(this).toggleClass('active');
 	$('.mobile-menu').toggleClass('active');
 });
 
-$('.slide > :first').addClass('active');
+// Codificando Slider 
 
+function slider(sliderName, velocidade) {
+  var sliderClass = '.' + sliderName;
+  activeClass = 'active',
+  rotate =  setInterval(rotateSlide, velocidade);
 
-function rotateSlide() {
-  var activeSlide = $('.slide > .active'),
-  nextSlide = activeSlide.next();
+  $(sliderClass + ' > :first').addClass(activeClass);
 
-  if(nextSlide.length == 0) {
-    nextSlide = $('.slide > :first');
+  $(sliderClass).hover(function(){
+    clearInterval(rotate);
+  }, function(){
+    rotate = setInterval(rotateSlide, velocidade);
+  });
+
+  function rotateSlide() {
+    var activeSlide = $(sliderClass + ' > .' + activeClass),
+      nextSlide = activeSlide.next();
+
+    if (nextSlide.length == 0) {
+      nextSlide = $(sliderClass + ' > :first');
+    }
+    activeSlide.removeClass(activeClass);
+    nextSlide.addClass(activeClass);
   }
-  activeSlide.removeClass('active');
-  nextSlide.addClass('active');
 }
 
-setInterval(rotateSlide, 2000);
-
+slider('introducao', 2000);
 
 
 
